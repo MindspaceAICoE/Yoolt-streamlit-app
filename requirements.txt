@@ -46,7 +46,7 @@ networkx
 ninja
 numba
 numpy
-openai
+openai>=0.10.0
 openai-whisper
 opencv-python-headless
 packaging
