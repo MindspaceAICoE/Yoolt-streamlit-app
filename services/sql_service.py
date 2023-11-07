@@ -1,6 +1,7 @@
 import mysql.connector
 from dotenv import load_dotenv, find_dotenv
 import os
+import streamlit as st
 load_dotenv()
 # Set up the database connection
 def get_database_connection():

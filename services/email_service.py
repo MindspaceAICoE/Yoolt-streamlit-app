@@ -1,6 +1,7 @@
 import os
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
+import streamlit as st
 from dotenv import load_dotenv, find_dotenv
 load_dotenv()
 _ = load_dotenv(find_dotenv())
