@@ -56,7 +56,6 @@ protobuf
 pyarrow
 pyclipper
 pydantic
-pydantic_core
 pydeck
 Pygments
 PyMySQL
