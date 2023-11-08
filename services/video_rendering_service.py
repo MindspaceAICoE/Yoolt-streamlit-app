@@ -1,5 +1,6 @@
 import os
 import tempfile
+import imageio_ffmpeg
 import whisper
 from pytube import YouTube
 from pytube.exceptions import VideoUnavailable

@@ -22,6 +22,7 @@ GitPython
 huggingface-hub
 idna
 imageio
+imageio-ffmpeg
 importlib-metadata
 Jinja2
 jsonpatch
