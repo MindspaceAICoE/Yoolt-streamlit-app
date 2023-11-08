@@ -1,3 +1,4 @@
+import os
 import tempfile
 import whisper
 from pytube import YouTube
@@ -5,23 +6,21 @@ from pytube.exceptions import VideoUnavailable
 
 def transcribeVideoOrchestrator(youtube_url: str, model_name: str):
     with tempfile.TemporaryDirectory() as temp_dir:
-        try:
-            video = downloadYoutubeVideo(youtube_url, temp_dir)
-            if not video:
-                return "Video could not be downloaded."
+        video = downloadYoutubeVideo(youtube_url, temp_dir)
+        if video and os.path.exists(video['path']):
             transcription = transcribe(video, model_name)
             return transcription
-        except Exception as e:
-            return f"An error occurred: {str(e)}"
+        else:
+            return "Failed to download video or video file does not exist."
 
 def transcribe(video: dict, model_name="medium"):
     try:
-        print(f"Transcribing: {video['name']}")
+        print(f"Transcribing: {video['name']} at path: {video['path']}")
+        if not os.path.exists(video['path']):
+            return "Transcription file not found."
         model = whisper.load_model(model_name)
         result = model.transcribe(video['path'])
         return result["text"]
-    except FileNotFoundError:
-        return "Transcription file not found."
     except Exception as e:
         return f"An error occurred during transcription: {str(e)}"
 
@@ -35,6 +34,7 @@ def downloadYoutubeVideo(youtube_url: str, directory: str) -> dict:
             print(f"Download complete: {file_path}")
             return {"name": yt.title, "thumbnail": yt.thumbnail_url, "path": file_path}
         else:
+            print("No suitable stream found.")
             return None
     except VideoUnavailable:
         print("Video is unavailable.")
