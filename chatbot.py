@@ -225,7 +225,7 @@ def handle_userinput(user_question):
     
     elif chat_mode == "Reminder":
         if st.button("Set Reminder"):
-            add_reminder(user_question)
+            add_reminder(user_question,db_url=st.secrets["COCKROACH_DB_URL"])
         # try:
         #     # Call your function to handle the reminder
         #     add_reminder(user_question)

@@ -1,22 +1,31 @@
-import mysql.connector
+# import mysql.connector
 from dotenv import load_dotenv, find_dotenv
 import os
 import streamlit as st
+import psycopg2
+from psycopg2.extras import RealDictCursor
+
+
 load_dotenv()
 # Set up the database connection
 def get_database_connection():
-    connection = mysql.connector.connect(
-        host=st.secrets["DB_HOST"],  # this is the name you find in the .env file
-        user=st.secrets["DB_USER"],
-        password=st.secrets["DB_PASSWORD"],
-        database=st.secrets["DB_NAME"]
-    )
+    # connection = mysql.connector.connect(
+    #     host=st.secrets["DB_HOST"],  # this is the name you find in the .env file
+    #     user=st.secrets["DB_USER"],
+    #     password=st.secrets["DB_PASSWORD"],
+    #     database=st.secrets["DB_NAME"]
+    # )
+    connection=psycopg2.connect(st.secrets["DATABASE_URL"])
     return connection
 
 # Fetch data from your table
 def get_data_from_database():
     connection = get_database_connection()
-    cursor = connection.cursor(dictionary=True)  # Use dictionary=True to get column names
+    # cursor = connection.cursor(dictionary=True)  # Use dictionary=True to get column names
+    # cursor.execute("SELECT * FROM reminders")
+    # data = cursor.fetchall()
+    # connection.close()
+    cursor = connection.cursor(cursor_factory=RealDictCursor)  # Use RealDictCursor to get column names
     cursor.execute("SELECT * FROM reminders")
     data = cursor.fetchall()
     connection.close()

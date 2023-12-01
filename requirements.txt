@@ -30,6 +30,7 @@ jsonpointer
 jsonschema
 jsonschema-specifications
 langchain
+langchain-core
 langchain-experimental
 langsmith
 lazy_loader
@@ -54,9 +55,11 @@ packaging
 pandas
 Pillow
 protobuf
+psycopg2-binary
 pyarrow
 pyclipper
 pydantic
+pydantic_core
 pydeck
 Pygments
 PyMySQL
@@ -83,6 +86,7 @@ six
 smmap
 sniffio
 SQLAlchemy
+sqlalchemy-cockroachdb
 starkbank-ecdsa
 streamlit
 sympy
